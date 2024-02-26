@@ -1,79 +1,115 @@
 local configs = require("plugins.configs")
-
 local plugins = {
-    { 
-        "catppuccin/nvim", 
-        name = "catppuccin", 
-        priority = 1000,
-        config = function()
-            require("catppuccin").setup(configs.catppuccin)
-            vim.cmd.colorscheme("catppuccin")
-        end,
-    },
-
     {
         "nvim-treesitter/nvim-treesitter",
         build = ":TSUpdate",
+        lazy = false,
         config = function()
             require("nvim-treesitter.configs").setup(configs.treesitter)
         end,
     },
 
-    {
-        'nvim-lualine/lualine.nvim',
-        dependencies = { 'nvim-tree/nvim-web-devicons' },
+    { 
+        "catppuccin/nvim", 
+        name = "catppuccin", 
+        priority = 1000,
+        lazy = false,
         config = function()
-            require("lualine").setup()
+            require("catppuccin").setup({
+                flavour = "mocha",
+                background = { light = "latte", dark = "mocha" },
+                transparent_background = false,
+            })
+
+            vim.cmd.colorscheme("catppuccin")
         end,
     },
 
     {
-        'windwp/nvim-autopairs',
+        "windwp/nvim-autopairs",
         event = "InsertEnter",
+        lazy = false,
+        opts = {},
+    },
+
+    {
+        "numToStr/Comment.nvim",
+        lazy = false,
+        opts = {},
+    },
+
+    {
+        "max397574/better-escape.nvim",
+        lazy = false,
+        opts = {
+            mapping = { "jk", "jj", },
+            keys = "<esc>",
+        },
+    },
+
+    {
+        "lukas-reineke/indent-blankline.nvim",
+        lazy = false,
         config = function()
-            require("nvim-autopairs").setup()
+            require("ibl").setup({
+                exclude = {
+                    filetypes = {
+                        "help",
+                        "terminal",
+                        "lazy",
+                        "dashboard",
+                    },
+                },
+            })
         end,
+    },
+
+    {
+        "nvim-lualine/lualine.nvim",
+        dependencies = { "nvim-tree/nvim-web-devicons" },
+        lazy = false,
+        opts = {
+            disabled_filetypes = {
+                "NVimTree",
+                "dashboard",
+            },
+        },
     },
 
     {
         "nvim-tree/nvim-tree.lua",
-        version = "*",
-        lazy = false,
         dependencies = {
             "nvim-tree/nvim-web-devicons",
         },
-        config = function()
-            require("nvim-tree").setup({})
-        end,
+        lazy = false,
+        opts = {},
     },
 
     {
-        "numToStr/Fterm.nvim",
-        config = function()
-            require("FTerm").setup({})
-        end,
+        "nvim-telescope/telescope.nvim",
+        branch = "0.1.x",
+        lazy = false,
+        dependencies = { "nvim-lua/plenary.nvim" },
+        opts = {},
     },
 
     {
-        'nvim-telescope/telescope.nvim', branch = '0.1.x',
-        dependencies = { 'nvim-lua/plenary.nvim' },
+        "nvimdev/dashboard-nvim",
+        event = "VimEnter",
+        dependencies = { "nvim-tree/nvim-web-devicons" },
+        opts = configs.dashboard,
+    },
+    
+    {
+        "folke/which-key.nvim",
+        event = "VeryLazy",
+        init = function()
+            vim.o.timeout = true
+            vim.o.timeoutlen = 300
+        end,
+        opts = {},
     },
 }
 
--- bootstrap package manager
-local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
-if not vim.loop.fs_stat(lazypath) then
-    vim.fn.system({
-        "git",
-        "clone",
-        "--filter=blob:none",
-        "https://github.com/folke/lazy.nvim.git",
-        "--branch=stable", -- latest stable release
-        lazypath,
-    })
-end
-vim.opt.rtp:prepend(lazypath)
-
--- initialize package manager
 require("lazy").setup(plugins, configs.lazy)
 

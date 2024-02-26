@@ -1,7 +1,5 @@
-local M = {}
-
-M.lazy = require("plugins.configs.lazy")
-M.catppuccin = require("plugins.configs.catppuccin")
-M.treesitter = require("plugins.configs.treesitter")
-
-return M
+return {
+    lazy = require("plugins.configs.lazy"),
+    treesitter = require("plugins.configs.treesitter"),
+    dashboard = require("plugins.configs.dashboard"),
+}

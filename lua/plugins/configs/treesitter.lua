@@ -1,16 +1,15 @@
-local M = {
+return {
     ensure_installed = {
-        "bash",
-        "c",
-        "cpp",
-        "gitignore",
-        "json", "jsonc",
-        "lua",
-        "make",
+        "bash", "c", "cpp", "json", "jsonc",
+        "lua", "make", "markdown", "python",
     },
-    sync_install = false,
-    highlight = { enable = true },
-    indent = { enable = true },  
+    
+    highlight = {
+        enable = true,
+        use_languagetree = true,
+    },
+    
+    indent = { 
+        enable = true, 
+    },
 }
-
-return M
