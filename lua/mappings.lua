@@ -8,7 +8,8 @@ map("n", "<leader>e", "<cmd> :NvimTreeFocus <cr>", { desc = "Focus NvimTree" })
 
 -- Telescope
 map("n", "<leader>ff", "<cmd> :Telescope find_files <cr>", { desc =  "Find files" })
-map("n", "<leader>fa", "<cmd> :Telescope find_files follow=true no_ignore=true hidden=true <cr>", { desc =  "Find all" })
+map("n", "<leader>fa", "<cmd> :Telescope find_files follow=true no_ignore=true cwd=~ <cr>", { desc =  "Find all" })
+map("n", "<leader>fw", require("telescope").extensions.whaler.whaler, { desc = "Change directory" })
 map("n", "<leader>fg", "<cmd> :Telescope live_grep <cr>", { desc =  "Live Grep" })
 map("n", "<leader>fb", "<cmd> :Telescope buffers <cr>", { desc =  "Find buffers" })
 map("n", "<leader>fc", "<cmd> :Telescope colorscheme <cr>", { desc =  "Find colorschemes" })

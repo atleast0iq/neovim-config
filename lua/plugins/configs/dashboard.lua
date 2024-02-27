@@ -18,7 +18,6 @@ return {
             "⡋⠄⠄⠄⠄⠄⠄⢰⣷⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⠄⠄",
             "",
             "",
-            "",
         },
 
         center = {
@@ -43,7 +42,7 @@ return {
                 key_format = "  %s",
                 action = "Telescope find_files",
             },
-            
+ 
             {
                 icon = "󰱼",
                 icon_hl = "group",
@@ -55,6 +54,17 @@ return {
                 action = ":Telescope find_files follow=true no_ignore=true hidden=true",
             },
 
+            {
+                icon = "",
+                icon_hl = "group",
+                desc = "    Change directory    ",
+                desc_hl = "String",
+                keymap = "<leader> fw",
+                key = "w",
+                key_format = "  %s",
+                action = "lua require('telescope').extensions.whaler.whaler()",
+            },
+            
             {
                 icon = "󱇧",
                 icon_hl = group,
@@ -68,8 +78,6 @@ return {
         },
         
         footer = {
-            "",
-            "",
             "",
             "",
             "",

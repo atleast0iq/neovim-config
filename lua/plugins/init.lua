@@ -70,8 +70,11 @@ local plugins = {
         lazy = false,
         opts = {
             disabled_filetypes = {
-                "NVimTree",
-                "dashboard",
+                statusline = {
+                    "NVimTree",
+                    "dashboard",
+                    "TelescopePrompt",
+                },
             },
         },
     },
@@ -89,8 +92,11 @@ local plugins = {
         "nvim-telescope/telescope.nvim",
         branch = "0.1.x",
         lazy = false,
-        dependencies = { "nvim-lua/plenary.nvim" },
-        opts = {},
+        dependencies = { 
+            "nvim-lua/plenary.nvim",
+            "SalOrak/whaler",
+        },
+        config = configs.telescope,
     },
 
     {
